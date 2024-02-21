@@ -31,9 +31,9 @@
 # -- end of LSF options --
 
 
-module load pandas/1.4.1-python-3.9.11 
-module load scipy/1.7.3-python-3.9.11
-module load python3/3.9.11
+module load pandas/2.1.3-python-3.10.13 
+module load scipy/1.11.4-python-3.10.13
+module load python3/3.10.13
 module load cuda/11.6
 
 python3 -m runs.test

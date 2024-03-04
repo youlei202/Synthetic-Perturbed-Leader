@@ -14,7 +14,7 @@ class CustomFunc(base.Regressor):
         self.b = b
         self.c = c
         self.d = d
-        self._weights = {'x': w}
+        self._weights = {'w': w}
 
     def learn_one(self, x: dict, y=None):
         """Fits to a set of features `x` and a real-valued target `y`.
@@ -36,7 +36,7 @@ class CustomFunc(base.Regressor):
 
 
     def predict_one(self, x: dict):
-        x_value = x['x']
+        x_value = x['w']
         t_value = x['t']
         return self._f(x=x_value, t=t_value)
 
@@ -46,7 +46,7 @@ class CustomFunc(base.Regressor):
         
         # Additional component that makes the function hard to predict for some x values
         # The frequency of this component is an exponential function of x
-        unpredictable_component = self.a * np.sin(np.exp(self.d * x) * t) if x > 0 else 0
+        unpredictable_component = self.a * np.sin(np.exp(self.d * x) * t) if x > 0 else x**2
         
         return main_component + unpredictable_component
 
@@ -56,4 +56,4 @@ class CustomFunc(base.Regressor):
             return self.a * t * np.exp(self.d * x) * np.cos(np.exp(self.d * x) * t) * self.d
         else:
             # For x <= 0, the function is a simple sinusoid in t, and the gradient wrt x is 0
-            return 0
+            return 2 * x
